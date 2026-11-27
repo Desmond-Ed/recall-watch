@@ -33,3 +33,33 @@ Entries use this format:
 - **Decision:** Publish the project in the public GitHub repository `Desmond-Ed/recall-watch`.
 - **Reason:** The repository owner requested a public GitHub repository and a push of the local project.
 - **Alternatives:** Keep the repository local; create a private GitHub repository.
+
+- **Date:** 2026-11-27
+- **Decision:** Use ES modules with Node's `NodeNext` TypeScript settings.
+- **Reason:** This works with the TypeScript source imports used by tsx, Vitest, and Node. Source imports include `.js` extensions so the compiled output runs as native ESM.
+- **Alternatives:** CommonJS with extensionless imports.
+
+- **Date:** 2026-11-27
+- **Decision:** Load the repository-root `.env` file with Node's built-in `process.loadEnvFile` in the server entry point.
+- **Reason:** It avoids an extra dependency, and keeping environment loading outside the config module lets tests pass environment objects directly.
+- **Alternatives:** Use dotenv; load environment files inside the config module.
+
+- **Date:** 2026-11-27
+- **Decision:** Validate configuration with Zod, require `PORT`, default `NODE_ENV` and `LOG_LEVEL`, and treat blank optional values as unset.
+- **Reason:** Invalid runtime configuration fails early with variable names and validation messages, without echoing values that might be secrets.
+- **Alternatives:** Read process environment variables directly in each module; require every setting before those features are implemented.
+
+- **Date:** 2026-11-27
+- **Decision:** Keep the Express app construction separate from the server listener.
+- **Reason:** Tests can exercise routes with Supertest without binding a network port.
+- **Alternatives:** Put app setup and listening in one module.
+
+- **Date:** 2026-11-27
+- **Decision:** Return API errors in a consistent `{ "error": { "code", "message" } }` shape and hide unknown error details from clients.
+- **Reason:** Clients get a predictable response, while internal error details are logged rather than exposed.
+- **Alternatives:** Return different error shapes per route; expose internal error messages.
+
+- **Date:** 2026-11-27
+- **Decision:** Use separate TypeScript configurations for checking source and tests versus emitting the API build.
+- **Reason:** Tests are type-checked without being included in the production output.
+- **Alternatives:** Use one TypeScript configuration for both checking and building.
