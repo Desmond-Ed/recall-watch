@@ -28,3 +28,8 @@ Entries use this format:
 - **Decision:** Make the host port configurable with a default of 5432.
 - **Reason:** The requested standard port remains the default, while a developer with another local database already bound to 5432 can run this project on a free port without stopping the other service.
 - **Alternatives:** Always bind host port 5432; use a fixed nonstandard host port.
+
+- **Date:** 2026-11-27
+- **Decision:** Publish the project in the public GitHub repository `Desmond-Ed/recall-watch`.
+- **Reason:** The repository owner requested a public GitHub repository and a push of the local project.
+- **Alternatives:** Keep the repository local; create a private GitHub repository.
